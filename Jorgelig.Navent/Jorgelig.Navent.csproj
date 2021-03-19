@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;netstandard2.0</TargetFrameworks>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <Description>Navent HTTP API client library.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="System.Reactive.Interfaces" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="HttpClients\Catalogo\" />
+    <Folder Include="HttpClients\Callbacks\" />
+    <Folder Include="HttpClients\Informacion\" />
+    <Folder Include="HttpClients\Multimedia\" />
+    <Folder Include="HttpClients\Contactos\" />
+    <Folder Include="HttpClients\Ventas\" />
+  </ItemGroup>
+  <Target Name="CopyDepsJsonFiles" AfterTargets="Publish">
+    <ItemGroup>
+      <DepsJsonFiles Include="$(TargetDir)*.deps.json" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DepsJsonFiles)" DestinationFolder="$(PublishDir)" />
+  </Target>  
+</Project>
