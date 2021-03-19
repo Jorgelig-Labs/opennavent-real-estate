@@ -11,13 +11,6 @@ using Xunit;
 
 namespace Jorgelig.Navent.Test
 {
-
-    public class NaventAccount
-    {
-        public string? ClientId { get;set; }
-        public string? ClientSecret { get;set; }
-    }
-
     public class NaventClientTest
     {
         private readonly INaventClient _client;
