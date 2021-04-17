@@ -15,7 +15,9 @@ namespace Jorgelig.Navent.Test
     {
         private readonly INaventClient _client;
         public static IConfigurationRoot Configuration { get; set; }
-
+        /// <summary>
+        /// https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=windows
+        /// </summary>
         private string? ClientId => Configuration["AppSettings:NaventAccount:ClientId"] ?? String.Empty;
         private string? ClientSecret => Configuration["AppSettings:NaventAccount:ClientSecret"] ?? String.Empty;
 
