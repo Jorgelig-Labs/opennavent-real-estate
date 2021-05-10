@@ -8,11 +8,11 @@ namespace Jorgelig.Navent.Interfaces.Client
         /// <summary>
         /// Listar todas las inmobiliarias vinculadas
         /// </summary>
-        /// <param name="token">Access Token</param>
+        /// <param name="request"></param>
         /// <param name="size">Cantidad de objetos por pagina. Defalut: 100, Maximo: 100, Minimo: 0</param>
         /// <param name="page">Numero de la pagina. Default: 0, Minimo: 0</param>
         /// <returns></returns>
-        Task<InmobiliariasPagableResponse> Search(string token, InmobiliariasPagableRequest request);
+        Task<InmobiliariasPagableResponse> Search(InmobiliariasPagableRequest request);
 
         /// <summary>
         /// Desvincular una inmobiliaria

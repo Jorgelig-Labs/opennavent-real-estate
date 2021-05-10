@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Jorgelig.Navent.HttpClients.Application;
 
 namespace Jorgelig.Navent.Interfaces.Client
 {
@@ -12,7 +13,7 @@ namespace Jorgelig.Navent.Interfaces.Client
         /// <param name="grantType">Default value: client_credentials</param>
         /// <returns></returns>
         /// <see cref="https://open.navent.com/api-reference/api_endpoints/authentication-application/loginusingpost"/>
-        Task<string> Login(string clientId, string clientSecret, string grantType = "client_credentials");
+        Task<ApplicationLoginResponse> Login(string clientId, string clientSecret, string grantType = "client_credentials");
 
         /// <summary>
         /// Revoca el token del protocolo de OAuth2

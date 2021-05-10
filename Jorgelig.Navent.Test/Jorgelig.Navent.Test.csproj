@@ -2,11 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-
     <IsPackable>false</IsPackable>
-
     <Nullable>enable</Nullable>
-
     <UserSecretsId>7d4b640f-9f2e-4dbb-9f88-b79630dcd7b1</UserSecretsId>
   </PropertyGroup>
 

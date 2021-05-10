@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Jorgelig.Navent.HttpClients;
@@ -31,8 +32,20 @@ namespace Jorgelig.Navent.Test
             var options = Options.Create(new NaventOptions()
             {
                 ApiBaseUrl = "http://api-rela.sandbox.open.navent.com/"
+                //ApiBaseUrl = "https://webhook.site/14f755c6-b8e4-4bdd-8cf7-74ad58b3ab29"
+                //ApiBaseUrl = "https://enaolv4fea1wq4s.m.pipedream.net"
             });
-            _client = new NaventClient(options, new HttpClient());
+
+            //ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback += 
+                (sender, certificate, chain, errors) =>
+                {
+                    return true;
+                };
+
+
+            _client = new NaventClient(options, new System.Net.Http.HttpClient(handler));
         }
 
         [Fact]
@@ -41,18 +54,25 @@ namespace Jorgelig.Navent.Test
             var token = await _client.Login(ClientId, ClientSecret);
 
             Assert.NotNull(token);
-            Assert.True(!string.IsNullOrWhiteSpace(token));
+            Assert.NotNull(token?.AccessToken);
+            
         }
 
         [Fact]
         public async Task Inmobiliarias_ResultList()
         {
-            var token = await _client.Login(ClientId, ClientSecret);
-            InmobiliariasPagableRequest? request = null;
-            var list = await _client.Search(token, request);
+            var loginResponse = await _client.Login(ClientId, ClientSecret);
+            
+            InmobiliariasPagableRequest? request = new InmobiliariasPagableRequest
+            {
+                AccessToken = loginResponse?.AccessToken,
+                Page = 1,
+                Size = 10
+            };
+            var list = await _client.Search(request);
             
             Assert.NotNull(list);
-            Assert.NotEmpty(list?.Content);
+            Assert.True(list?.Number > 0);
         }
     }
 }

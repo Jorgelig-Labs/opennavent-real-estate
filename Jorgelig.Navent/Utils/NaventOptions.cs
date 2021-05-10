@@ -4,5 +4,6 @@
     {
         public string? ApiBaseUrl { get; set; }
         public string? Token { get; set; }
+        public string? DefaultHost { get; set; }
     }
 }
